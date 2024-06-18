@@ -1,0 +1,15 @@
+import pymorphy3
+
+morph = pymorphy3.MorphAnalyzer()
+word = morph.parse(input())[0]
+if word.tag.POS in ('INFN', 'VERB'):
+    b = [{'1per', 'sing'}, {'1per', 'plur'}, {'2per', 'sing'}, {'2per', 'plur'}, {'3per', 'sing'},
+         {'3per', 'plur'}]
+    print('Прошедшее время:')
+    for i in ['masc', 'femn', 'neut', 'plur']:
+        print(word.inflect({'past', i})[0])
+    print('Настоящее время:')
+    for i in b:
+        print(word.inflect(i)[0])
+else:
+    print('Не глагол')
