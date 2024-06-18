@@ -1,0 +1,11 @@
+import sys
+import pymorphy3
+
+morph = pymorphy3.MorphAnalyzer()
+a = list(j.strip('?,.!-:;\t \n').lower() for i in list(map(str.strip, sys.stdin)) for j in i.split())
+b = {}
+for i in a:
+    word = morph.parse(i)[0]
+    if word.tag.POS == "NOUN" and (word.score > 0.5):
+        b[word.normal_form] = b.get(word.normal_form, 0) + 1
+print(*list(i[0] for i in sorted(b.items(), key=lambda x: (x[1], x[0]), reverse=True))[:10])
