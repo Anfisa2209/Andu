@@ -1,0 +1,25 @@
+import pymorphy3
+
+c = input()
+morph = pymorphy3.MorphAnalyzer()
+res = morph.parse(c)[0]
+if res.tag.POS == 'NOUN':
+    word = morph.parse(c)[0]
+    a = {'Именительный падеж:': word.inflect({'sing', 'nomn'})[0],
+         'Родительный падеж:': word.inflect({'gent', 'sing'})[0],
+         "Дательный падеж:": word.inflect({'datv', 'sing'})[0], 'Винительный падеж:': word.inflect({'accs', 'sing'})[0],
+         "Творительный падеж:": word.inflect({'ablt', 'sing'})[0],
+         'Предложный падеж:': word.inflect({'loct', 'sing'})[0]}
+    print('Единственное число:')
+    for i, j in a.items():
+        print(i, j)
+    print('Множественное число:')
+    b = {'Именительный падеж:': word.inflect({'plur', 'nomn'})[0],
+         'Родительный падеж:': word.inflect({'gent', 'plur'})[0],
+         "Дательный падеж:": word.inflect({'datv', 'plur'})[0], 'Винительный падеж:': word.inflect({'accs', 'plur'})[0],
+         "Творительный падеж:": word.inflect({'ablt', 'plur'})[0],
+         'Предложный падеж:': word.inflect({'loct', 'plur'})[0]}
+    for i, j in b.items():
+        print(i, j)
+else:
+    print("Не существительное")
