@@ -1,0 +1,18 @@
+import sys
+
+import pymorphy3
+
+morph = pymorphy3.MorphAnalyzer()
+for i in list(map(str.strip, sys.stdin)):
+    word = morph.parse(i)[0].tag
+    if 'NOUN' in word:
+        b = {'ADJF', word.gender, word.number}
+        if word.number == 'plur':
+            b.remove(word.gender)
+        a = morph.parse('Живое')[0].inflect(b)[0]
+        if 'anim' in word:
+            print(a.capitalize())
+        else:
+            print(f'Не {a}')
+    else:
+        print('Не существительное')
