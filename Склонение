@@ -1,0 +1,14 @@
+import pymorphy3
+
+morph = pymorphy3.MorphAnalyzer()
+word = morph.parse('бутылка')[0]
+i = 99
+while i != 0:
+    print(f'В холодильнике {i} {word.make_agree_with_number(i)[0]} кваса.')
+    print('Возьмём одну и выпьем.')
+    i -= 1
+    if i % 10 == 1 and i != 11:
+        a = 'Осталась'
+    else:
+        a = 'Осталось'
+    print(f'{a} {i} {word.make_agree_with_number(i)[0]} кваса.')
