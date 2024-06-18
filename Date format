@@ -1,0 +1,31 @@
+class AmericanDate:
+    def __init__(self, y, m, d):
+        self.y = y
+        self.m = m
+        self.d = d
+
+    def set_year(self, y):
+        self.y = y
+
+    def set_month(self, m):
+        self.m = m
+
+    def set_day(self, d):
+        self.d = d
+
+    def get_year(self):
+        return self.y
+
+    def get_month(self):
+        return self.m
+
+    def get_day(self):
+        return self.d
+
+    def format(self):
+        return f'{self.m if self.m > 9 else "0" + str(self.m)}.{self.d if self.d > 9 else "0" + str(self.d)}.{self.y}'
+
+
+class EuropeanDate(AmericanDate):
+    def format(self):
+        return f'{self.d if self.d > 9 else "0" + str(self.d)}.{self.m if self.m > 9 else "0" + str(self.m)}.{self.y}'
